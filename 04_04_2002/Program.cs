@@ -105,17 +105,7 @@ namespace _04_04_2002
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    while (true)
-                    {
-                        Console.WriteLine("Введите число: ");
-                        var value = Convert.ToInt32(Console.ReadLine());
-                        if (value < 99 && value > 1)
-                        {
-                            matrix[i, j] = value;
-                            return;
-                        }
-                        Console.WriteLine("Число больше 99 или меньше 1");
-                    }
+                    matrix[i, j] = CheckValue();
                 }
             }
             Console.WriteLine("Матрица введена с клавиатуры");
@@ -141,9 +131,27 @@ namespace _04_04_2002
                 Console.WriteLine("Массив пуст");
             }
         }
+        private static int CheckValue()
+        {
+            int value;
+            while (true)
+            {
+                Console.WriteLine("Введите число: ");
+                value = Convert.ToInt32(Console.ReadLine());
+                if (value <= 99 && value >= 1)
+                {
+                    return value;
+                }
+                else
+                {
+                    Console.WriteLine("Число больше 99 или меньше 1");
+                }
+            }
+
+        }
         private static void Exit()
         {
-            Console.WriteLine("Нажмите чтоб начать ввод данных заново...");
+            Console.WriteLine("Нажмите чтоб начать ввод данных");
             Console.ReadKey();
             Console.Clear();
         }
