@@ -1,23 +1,70 @@
 ﻿using _06_06_2022;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _06_04_2022
 {
     class Program
     {
         private static Random rnd = new Random();
-        public static List<Airplane> airplanes = new List<Airplane>();
+        public static List<Airplane> Airplanes = new List<Airplane>();
         static void Main(string[] args)
         {
-            for (int i = 1; i <= 25; i++)
+            GenerateAirplanes();
+            var flag = true;
+            while (flag)
             {
-                var destination = RandomDestination();
-                var departureTime = RandomDateTime();
-                var freePlaces = rnd.Next(0, 10);
-                airplanes.Add(new Airplane(destination, departureTime, freePlaces));
+                Console.WriteLine("Выберите операцию:  Q - Создать самолет  W - Показать самолеты  E - Купить билеты  R - Выход");
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.Q:
+                        Console.Clear();
+                        CreateAirplane();
+                        Exit();
+                        break;
+                    case ConsoleKey.W:
+                        Console.Clear();
+                        ShowAirplanes(Airplanes);
+                        Exit();
+                        break;
+                    case ConsoleKey.E:
+                        Console.Clear();
+                        BuyTicket();
+                        Exit();
+                        break;
+                    case ConsoleKey.R:
+                        Console.Clear();
+                        flag = false;
+                        break;
+                    default:
+                        Console.WriteLine();
+                        Console.WriteLine("Вы ввели неверную кнопку");
+                        Exit();
+                        break;
+                }
             }
-            Console.WriteLine("Cписок всех билетов");
+        }
+
+        private static void BuyTicket()
+        {
+            Console.WriteLine("Введите количество билетов");
+            var count = Airplane.CheckedValueInt();
+            Airplane.ShowPlaces();
+            Console.WriteLine("Введите город");
+            var city = Console.ReadLine();
+            var airplanes = Airplanes.Where(item => item.CheckAvailable(city, count)).ToList();
+            ShowAirplanes(airplanes);
+        }
+
+        private static void CreateAirplane()
+        {
+            Airplanes.Add(Airplane.InputData());
+        }
+
+        private static void ShowAirplanes(List<Airplane> airplanes)
+        {
+            Console.WriteLine("Cписок билетов");
             foreach (var item in airplanes)
             {
                 Console.WriteLine(item);
@@ -27,32 +74,37 @@ namespace _06_04_2022
                 Console.WriteLine("Список пуст");
             }
         }
-        public static string RandomDestination()
+
+        private static void GenerateAirplanes()
         {
-            var array = new string[7];
-            array[0] = "Китай, Пекин";
-            array[1] = "Россия, СПб";
-            array[2] = "Молдова, Кишинёв";
-            array[3] = "Украина, Киев";
-            array[4] = "Румыния, Бухарест";
-            array[5] = "Англия, Лондон";
-            array[6] = "Германия, Берлин";
-            string result = array[rnd.Next(0, array.Length - 1)];
-            return result;
+            Airplanes = new List<Airplane>();
+            for (int i = 1; i <= 25; i++)
+            {
+                var destination = Airplane.RandomDestination();
+                var departureTime = RandomDateTime();
+                var freePlaces = rnd.Next(0, 10);
+                Airplanes.Add(new Airplane(destination, departureTime, freePlaces));
+            }
         }
 
-        public static DateTime RandomDateTime(DateTime? min = null, DateTime? max = null)
+        private static DateTime RandomDateTime(DateTime? min = null, DateTime? max = null)
         {
-            min = min ?? new DateTime(2022, 04, 07);
-            max = max ?? new DateTime(2022, 04, 14);
+            min = min ?? new DateTime(2022, 04, 08);
+            max = max ?? new DateTime(2022, 04, 12);
 
             var range = max.Value - min.Value;
-            var randomUpperBound = (Int32)range.TotalMinutes;
+            var randomUpperBound = (int)range.TotalMinutes;
             if (randomUpperBound <= 0)
-                randomUpperBound = rnd.Next(1, Int32.MaxValue);
+                randomUpperBound = rnd.Next(1, int.MaxValue);
 
-            var randTimeSpan = TimeSpan.FromMinutes((Int64)(range.TotalMinutes - rnd.Next(0, randomUpperBound)));
+            var randTimeSpan = TimeSpan.FromMinutes((long)(range.TotalMinutes - rnd.Next(0, randomUpperBound)));
             return min.Value.Add(randTimeSpan);
+        }
+        private static void Exit()
+        {
+            Console.WriteLine("Нажмите для продолжения...");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }
