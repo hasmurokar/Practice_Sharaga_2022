@@ -88,7 +88,7 @@ namespace _06_06_2022
                 var text = Console.ReadLine();
                 if (int.TryParse(text, out int value))
                 {
-                    Console.WriteLine("Incorrect input. Try again.");
+                    Console.WriteLine("Введено неверное значение. Повторите попытку");
                 }
                 else
                 {
