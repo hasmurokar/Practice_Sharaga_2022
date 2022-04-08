@@ -3,15 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace _08_04_2022
 {
     class Program
     {
         private static List<Student> Students = new List<Student>();
-        private static List<Student> Loader = new List<Student>();
         private static Random rnd = new Random();
         static void Main(string[] args)
         {
