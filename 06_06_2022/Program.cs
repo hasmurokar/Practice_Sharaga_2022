@@ -15,7 +15,7 @@ namespace _06_04_2022
             var flag = true;
             while (flag)
             {
-                Console.WriteLine("Выберите операцию:  Q - Создать самолет  W - Показать самолеты  E - Купить билеты  R - Выход");
+                Console.WriteLine("Выберите операцию:  Q - Создать самолет  \nW - Показать самолеты  E - Купить билеты  \nR - Выход");
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.Q:
