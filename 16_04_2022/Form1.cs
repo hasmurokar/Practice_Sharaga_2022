@@ -14,7 +14,7 @@ namespace _16_04_2022
 {
     public partial class Form1 : Form
     {
-        DateTime timerTime = new DateTime(2022, 4, 16, 0, 0, 0);
+        DateTime timerTime = new DateTime(2022, 4, 16, 10, 0, 0);
         List<Time> timeList = new List<Time>();
         Time time = null;
         public Form1()
