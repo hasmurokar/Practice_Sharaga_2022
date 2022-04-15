@@ -89,8 +89,8 @@ namespace _06_04_2022
 
         private static DateTime RandomDateTime(DateTime? min = null, DateTime? max = null)
         {
-            min = min ?? new DateTime(2022, 04, 08);
-            max = max ?? new DateTime(2022, 04, 12);
+            min = min ?? new DateTime(2022, 04, 14);
+            max = max ?? new DateTime(2022, 04, 18);
 
             var range = max.Value - min.Value;
             var randomUpperBound = (int)range.TotalMinutes;

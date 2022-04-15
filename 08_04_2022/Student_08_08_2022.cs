@@ -8,9 +8,9 @@ namespace _08_04_2022
 {
     public struct Student
     {
-        private string FullName { get; set; }
-        private string Address { get; set; }
-        private int Distance { get; set; }
+        public string FullName { get; set; }
+        public string Address { get; set; }
+        public int Distance { get; set; }
 
         public Student(string fullName, string address, int distance)
         {

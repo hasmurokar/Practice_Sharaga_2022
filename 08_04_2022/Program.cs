@@ -16,7 +16,7 @@ namespace _08_04_2022
             var flag = true;
             while (flag)
             {
-                Console.WriteLine("Выберите операцию: Q - Добавить студента A - Показать список студентов Z - Выделить места в общежитии \nЗагрузить данные в файл - S Загрузить данные из файла - X\nW - Выход");
+                Console.WriteLine("Выберите операцию: Q - Добавить студента A - Показать список студентов\nОчистить список студентов - C Выделить места в общежитии -  Z\nЗагрузить данные в файл - S Загрузить данные из файла - X\nW - Выход");
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.Q:
@@ -33,6 +33,12 @@ namespace _08_04_2022
                     case ConsoleKey.Z:
                         Console.Clear();
                         SetPlaces();
+                        Exit();
+                        break;
+                    case ConsoleKey.C:
+                        Console.Clear();
+                        Console.WriteLine("Список студентов очищен");
+                        Students.Clear();
                         Exit();
                         break;
                     case ConsoleKey.S:
